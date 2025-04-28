@@ -1,5 +1,6 @@
 import yaml
 import flask
+import re
 
 APP = flask.Flask(__name__)
 
@@ -23,6 +24,8 @@ def print_nametag(format_string, person):
 
 def fetch_website(urllib_version, url):
     # Import the requested version (2 or 3) of urllib
+    if not re.match(urlib_version, "^(\d+\.)?(\d+\.)?(\*|\d+)$"):
+        raise Exception("Wrong version of urlib")
     exec(f"import urllib{urllib_version} as urllib", globals())
     # Fetch and print the requested URL
  
